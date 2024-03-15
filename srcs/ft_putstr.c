@@ -1,33 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putbase_fd.c                                    :+:      :+:    :+:   */
+/*   ft_putstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/11 15:15:28 by danpalac          #+#    #+#             */
-/*   Updated: 2024/03/11 15:15:35 by danpalac         ###   ########.fr       */
+/*   Created: 2024/03/06 14:16:26 by danpalac          #+#    #+#             */
+/*   Updated: 2024/03/08 13:38:16 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-void	ft_putbase_fd(int nbr, const char *base, int fd)
+int	ft_putstr(char const *s)
 {
-	int		base_len;
-	long	nb;
-	char	c;
+	int	result;
 
-	base_len = ft_strlen(base);
-	if (nbr < 0)
-	{
-		write(fd, "-", 1);
-		nb = -((long)nbr);
-	}
-	else
-		nb = (long)nbr;
-	if (nb > (base_len - 1))
-		ft_putbase_fd(nb / base_len, base, fd);
-	c = *(base + (nb % base_len));
-	write(fd, &c, 1);
+	result = 0;
+	if (!s)
+		return (write(1, "(null)", 6));
+	while (*s)
+		result += ft_putchar(*s++);
+	return (result);
 }
+/*
+int main()
+{
+	ft_putstr("adios");
+	return 0;
+}*/

@@ -1,32 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_abs.c                                           :+:      :+:    :+:   */
+/*   ft_putchar.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: danpalac <danpalac@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/08 13:37:17 by danpalac          #+#    #+#             */
-/*   Updated: 2024/03/08 13:37:20 by danpalac         ###   ########.fr       */
+/*   Created: 2024/03/07 10:20:13 by danpalac          #+#    #+#             */
+/*   Updated: 2024/03/07 10:20:33 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "ft_printf.h"
 
-long	ft_abs(long n)
+int	ft_putchar(int c)
 {
-	long	nb;
-
-	nb = 1;
-	if (n < 0)
-		nb *= -n;
-	else
-		nb *= n;
-	return (nb);
+	if (write(1, &c, 1) == -1)
+		return (-1);
+	return (1);
 }
-
 /*
 int main()
 {
-    int a = -190000;
-    printf("%d\n", abs(a));
+	printf("%d\n", ft_putchar(NULL));
+	return 0;
 }*/

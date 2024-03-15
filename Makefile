@@ -2,13 +2,15 @@
 #                                DIRECTORIES                                   #
 # **************************************************************************** #
 
-SRCP = ./
-SRCS_PRINTF = ft_printf.c
-SRCS = $(addprefix $(SRCP),$(SRCS_PRINTF))
 
-OBJS = $(SRCS:.c=.o)
-
-HEAD = ./
+OBJS_DIR = objs/
+SRC_DIR = srcs/
+SRCS_FILES = ft_printf.c ft_abs.c ft_putaddress.c ft_putchar.c ft_putnbr.c ft_putunsigned.c \
+             ft_putbase_fd.c ft_puthexa.c ft_putstr.c \
+	
+SRC	= $(addprefix $(SRC_DIR), $(SRCS_FILES))
+OBJS =	$(addprefix $(OBJS_DIR), $(SRCS_FILES:%.c=%.o))
+INC	=	inc/
 
 # **************************************************************************** #
 #                                    LIBFT                                     #
@@ -23,11 +25,10 @@ LIBFT_AR = $(addprefix $(LIBFT_DIR), $(LIBFT))
 # **************************************************************************** #
 
 NAME		= libftprintf.a
-EXE			= exe
 AR			= ar rcs
-RM			= rm -f
+RM			= rm -rf
 GCC			= gcc
-CFLAGS 		= -Wall -Wextra -Werror
+CFLAGS 		= -Wall -Wextra -Werror -I $(INC)
 
 RESET		= \033[0m
 BOLD		= \033[1m
@@ -40,41 +41,30 @@ BLUE		= \033[34m
 #                                   TARGETS                                    #
 # **************************************************************************** #
 
-all: $(NAME) $(LIBFT_AR)
+all: $(NAME)
 
-$(OBJS): %.o: %.c
-	$(GCC) $(CFLAGS) -c -I $(HEAD) $< -o $@
+$(OBJS_DIR)%.o: $(SRC_DIR)%.c
+	@[ -d $(OBJS_DIR) ] | mkdir -p $(OBJS_DIR)
+	$(GCC) $(CFLAGS) -c $< -o $@
 
 $(LIBFT_AR):
 	@make -C $(LIBFT_DIR)
 
 $(NAME): $(OBJS) $(LIBFT_AR)
 	cp $(LIBFT_AR) $(NAME)
-	@if $(AR) $@ $^; then \
-		echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"; \
-		echo "$(BLUE)Created: $(words $(OBJS) $(LIBFT_AR)) File/s [.o/.a] $(RESET)"; \
-		echo "$(BLUE)Created: $(NAME)"; \
-		echo "$(BLUE)Created: $(OBJS)$(RESET)"; \
-	fi
+	$(AR) $@ $^
 
 clean:
 	@make fclean -C $(LIBFT_DIR)
-	@$(RM) $(OBJS) a.out
-	@echo "$(GREEN)$(BOLD)SUCCESS$(RESET)"
-	@echo "$(YELLOW)Removed: $(words $(OBJS) $(NAME)) File/s [.o/.a] $(RESET)"
-	@echo "$(YELLOW)Removed: $(RED)$(OBJS)"
+	$(RM) $(OBJS_DIR)
 
 fclean: clean
-	@$(RM) $(NAME) $(EXE)
-	@echo "$(YELLOW)Removed: $(RED)$(NAME) $(EXE)$(RESET)"
+	@$(RM) $(NAME)
 
 norminette: $(LIBFT_DIR)
 	norminette $(LIBFT_DIR)
 	norminette .
 
-$(EXE): $(NAME)
-	$(GCC) $(CFLAGS) $(SRCS_PRINTF) $(NAME) -o $(EXE) && ./$(EXE)
-
 re: fclean all
 
-.PHONY: all clean fclean re norminette exe
+.PHONY: all clean fclean re norminette
