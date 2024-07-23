@@ -5,7 +5,7 @@ ft_printf es una implementación personalizada de la función de la biblioteca e
 ## Uso
 Prototipo
 
-    int ft_printf(const char *format, ...);
+    int ft_printf(const char *str, ...);
 
 format: Una cadena terminada en nulo que contiene los caracteres y especificadores de formato que controlan cómo se convierten y formatean los argumentos posteriores para la salida.
 Retorna el número de caracteres impresos (excluyendo el byte nulo utilizado para finalizar la salida en cadenas) o -1 si ocurre un error.
