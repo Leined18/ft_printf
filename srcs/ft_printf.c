@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: danpalac <danpalac@student.42madrid>       +#+  +:+       +#+        */
+/*   By: danpalac <danpalac@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 12:02:45 by danpalac          #+#    #+#             */
-/*   Updated: 2024/03/12 15:13:54 by danpalac         ###   ########.fr       */
+/*   Updated: 2024/08/11 15:32:40 by danpalac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	ft_format(va_list args, const char format)
 		p = va_arg(args, void *);
 		if (p)
 			return (ft_putaddress(p));
-		return (ft_putstr("0x0"));
+		return (ft_putstr("(nil)"));
 	}
 	else if (format == 'u')
 		return (ft_putunsigned(va_arg(args, unsigned int)));
