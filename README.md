@@ -13,7 +13,7 @@
 int ft_printf(const char *str, ...);
 ```
 
-- **str**: A null-terminated string that contains the characters and format specifiers, controlling how the arguments are converted and formatted for output.
+- **str**: A null-terminated string that contains characters and format specifiers, controlling how the arguments are converted and formatted for output.
 
 ### Return Value:
 - The function returns the total number of characters printed (excluding the null byte used to end output to strings).
@@ -36,13 +36,22 @@ The following format specifiers are implemented in **ft_printf**:
 
 ## Compilation
 
-To compile a program using **ft_printf**, use the following command:
+To compile **ft_printf**, run the following command:
 ```bash
-gcc -Wall -Wextra -Werror your_file.c ft_printf.c ft_printf_utils.c -o your_program
+make
 ```
 
-- Replace **your_file.c** with your source file.
-- Replace **your_program** with the desired name for the executable.
+This will generate a static library called **`libftprintf.a`**.
+
+To compile your program using **ft_printf**, link the library as follows:
+```bash
+gcc -Wall -Wextra -Werror your_file.c -L. -lftprintf -o your_program
+```
+
+- **`your_file.c`**: Your source file.
+- **`your_program`**: The name of the executable.
+- **`-L.`**: Specifies the current directory for the library.
+- **`-lftprintf`**: Links the `libftprintf.a` library.
 
 ---
 
