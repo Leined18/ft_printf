@@ -69,4 +69,3 @@ In this example:
 ## Notes
 - **ft_printf** should handle different edge cases (e.g., null pointers, large numbers) similarly to the standard `printf` function.
 - The implementation of **ft_printf** does not use standard library functions like `printf` itself, ensuring a low-level, custom handling of format specifiers and output.
-- 
